@@ -52,10 +52,11 @@ public class TestDbConnection : DbConnection, IDbConnection
 {
     public TestDbCommand DbCommand;
     public TestDbParameterCollection DbParameterCollection;
+    public DataTable DataTable = new();
 
-    //public void Dispose()
-    //{
-    //}
+        //public void Dispose()
+        //{
+        //}
 
     //public IDbTransaction BeginTransaction()
     //{
@@ -118,15 +119,21 @@ public class TestDbConnection : DbConnection, IDbConnection
     protected override DbCommand CreateDbCommand()
     {
         DbParameterCollection = new TestDbParameterCollection();
-        DbCommand = new(this, DbParameterCollection);
+        DbCommand = new(this, DbParameterCollection, DataTable);
         return DbCommand;
     }
 }
 
 public class TestDbCommand : DbCommand, IDbCommand
 {
-    public TestDbCommand(DbConnection dbConnection, TestDbParameterCollection dbParameterCollection)
+    private readonly DataTable _dataTable;
+
+    public TestDbCommand(
+        DbConnection dbConnection, 
+        TestDbParameterCollection dbParameterCollection,
+        DataTable dataTable)
     {
+        _dataTable = dataTable;
         DbConnection = dbConnection;
         DbParameterCollection = dbParameterCollection;
     }
@@ -209,7 +216,7 @@ public class TestDbCommand : DbCommand, IDbCommand
 
     protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
     {
-        return new DataTableReader(new DataTable());
+        return new DataTableReader(_dataTable);
     }
 }
 
