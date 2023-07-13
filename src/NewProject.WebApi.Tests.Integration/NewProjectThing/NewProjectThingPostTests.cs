@@ -1,0 +1,28 @@
+using System.Net.Http.Json;
+using AutoFixture;
+using FluentAssertions;
+
+namespace NewProject.WebApi.Tests.Integration.NewProjectThing;
+
+public class NewProjectThingPostTests : TestBase
+{
+    private readonly string _id;
+    private readonly NewProjectThingRequestModel _model;
+
+    public NewProjectThingPostTests(IntegrationTestsFixture fixture) : base(fixture)
+    {
+        _id = AutoFixture.Create<string>();
+        _model = AutoFixture.Create<NewProjectThingRequestModel>();
+    }
+
+    [Fact]
+    public async Task Given_ValidRequest_When_Post_Then_ShouldExecuteSqlCommand()
+    {
+        HttpResponseMessage = await HttpClient.PostAsJsonAsync($"NewProjectThing/{_id}", _model);
+
+        HttpResponseMessage.EnsureSuccessStatusCode();
+        TestDbConnectionFactory.DbConnection.DbCommand.CommandText.Should().Be("UpsertNewProjectThing");
+        TestDbConnectionFactory.DbConnection.DbParameterCollection.DbParameters.Should().ContainSingle(p => p.ParameterName == "Id" && _id.Equals(p.Value));
+        TestDbConnectionFactory.DbConnection.DbParameterCollection.DbParameters.Should().ContainSingle(p => p.ParameterName == "TheThing" && _model.TheThing.Equals(p.Value));
+    }
+}
