@@ -3,11 +3,11 @@ using System.Data.SqlClient;
 
 namespace NewProject.WebApi.Infrastructure.Dapper;
 
-public class DbConnectionFactory : IDbConnectionFactory
+public class SqlServerDbConnectionFactory : IDbConnectionFactory
 {
     private readonly IConfiguration _configuration;
 
-    public DbConnectionFactory(IConfiguration configuration)
+    public SqlServerDbConnectionFactory(IConfiguration configuration)
     {
         _configuration = configuration;
     }

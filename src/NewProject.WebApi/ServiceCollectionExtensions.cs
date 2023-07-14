@@ -7,8 +7,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddServices(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
-        serviceCollection.AddSingleton<IRepository<NewProjectThing>, ThingRepository>();
+        serviceCollection.AddSingleton<IDbConnectionFactory, SqlServerDbConnectionFactory>();
+        serviceCollection.AddSingleton<IRepository<NewProjectThing>, NewProjectThingDapperRepository>();
 
         return serviceCollection;
     }

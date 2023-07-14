@@ -4,11 +4,11 @@ using NewProject.WebApi.Domain;
 
 namespace NewProject.WebApi.Infrastructure.Dapper
 {
-    public class ThingRepository : IRepository<NewProjectThing>
+    public class NewProjectThingDapperRepository : IRepository<NewProjectThing>
     {
         private readonly IDbConnectionFactory _dbConnectionFactory;
 
-        public ThingRepository(IDbConnectionFactory dbConnectionFactory)
+        public NewProjectThingDapperRepository(IDbConnectionFactory dbConnectionFactory)
         {
             _dbConnectionFactory = dbConnectionFactory;
         }
