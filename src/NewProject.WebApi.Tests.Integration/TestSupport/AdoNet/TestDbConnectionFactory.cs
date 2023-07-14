@@ -1,5 +1,5 @@
 using System.Data;
-using NewProject.Infrastructure.Dapper.SqlServer;
+using NewProject.WebApi.Infrastructure.Dapper;
 
 namespace NewProject.WebApi.Tests.Integration.TestSupport.AdoNet;
 

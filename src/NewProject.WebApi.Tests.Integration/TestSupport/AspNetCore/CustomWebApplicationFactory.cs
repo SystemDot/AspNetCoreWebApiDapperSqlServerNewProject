@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using NewProject.Infrastructure.Dapper.SqlServer;
+using NewProject.WebApi.Infrastructure.Dapper;
 using NewProject.WebApi.Tests.Integration.TestSupport.AdoNet;
 
 namespace NewProject.WebApi.Tests.Integration.TestSupport.AspNetCore;

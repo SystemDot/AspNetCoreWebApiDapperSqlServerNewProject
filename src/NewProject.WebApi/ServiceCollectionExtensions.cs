@@ -1,5 +1,5 @@
-﻿using NewProject.Domain;
-using NewProject.Infrastructure.Dapper.SqlServer;
+﻿using NewProject.WebApi.Domain;
+using NewProject.WebApi.Infrastructure.Dapper;
 
 namespace NewProject.WebApi;
 

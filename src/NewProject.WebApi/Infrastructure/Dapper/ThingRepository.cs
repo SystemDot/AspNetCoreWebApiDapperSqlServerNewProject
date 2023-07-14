@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using Dapper;
-using NewProject.Domain;
+using NewProject.WebApi.Domain;
 
-namespace NewProject.Infrastructure.Dapper.SqlServer
+namespace NewProject.WebApi.Infrastructure.Dapper
 {
     public class ThingRepository : IRepository<NewProjectThing>
     {

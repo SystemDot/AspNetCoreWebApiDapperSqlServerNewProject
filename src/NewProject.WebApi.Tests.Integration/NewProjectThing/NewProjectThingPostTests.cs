@@ -1,6 +1,7 @@
 using System.Net.Http.Json;
 using AutoFixture;
 using FluentAssertions;
+using NewProject.WebApi.Controllers;
 using NewProject.WebApi.Tests.Integration.TestSupport;
 using NewProject.WebApi.Tests.Integration.TestSupport.XUnit;
 

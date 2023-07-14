@@ -1,6 +1,6 @@
 using AutoFixture;
 using Microsoft.Extensions.DependencyInjection;
-using NewProject.Infrastructure.Dapper.SqlServer;
+using NewProject.WebApi.Infrastructure.Dapper;
 using NewProject.WebApi.Tests.Integration.TestSupport.AdoNet;
 using NewProject.WebApi.Tests.Integration.TestSupport.XUnit;
 

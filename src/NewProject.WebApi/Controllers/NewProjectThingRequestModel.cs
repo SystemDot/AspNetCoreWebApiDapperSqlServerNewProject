@@ -1,4 +1,4 @@
-﻿namespace NewProject.WebApi;
+﻿namespace NewProject.WebApi.Controllers;
 
 public class NewProjectThingRequestModel
 {

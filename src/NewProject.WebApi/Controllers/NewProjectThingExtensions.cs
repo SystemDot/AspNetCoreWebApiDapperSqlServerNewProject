@@ -1,7 +1,6 @@
-﻿using NewProject.Domain;
-using NewProject.WebApi.Controllers;
+﻿using NewProject.WebApi.Domain;
 
-namespace NewProject.WebApi;
+namespace NewProject.WebApi.Controllers;
 
 public static class NewProjectThingExtensions
 {

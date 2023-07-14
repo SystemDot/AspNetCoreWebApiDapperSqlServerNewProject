@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using NewProject.Domain;
+using NewProject.WebApi.Domain;
 
 namespace NewProject.WebApi.Controllers
 {

@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace NewProject.Infrastructure.Dapper.SqlServer;
+namespace NewProject.WebApi.Infrastructure.Dapper;
 
 public interface IDbConnectionFactory
 {

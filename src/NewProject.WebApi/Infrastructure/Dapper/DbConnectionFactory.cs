@@ -1,8 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
 
-namespace NewProject.Infrastructure.Dapper.SqlServer;
+namespace NewProject.WebApi.Infrastructure.Dapper;
 
 public class DbConnectionFactory : IDbConnectionFactory
 {

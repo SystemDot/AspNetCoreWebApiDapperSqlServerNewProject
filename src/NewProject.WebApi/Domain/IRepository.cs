@@ -1,4 +1,4 @@
-﻿namespace NewProject.Domain;
+﻿namespace NewProject.WebApi.Domain;
 
 public interface IRepository<TEntity>
 {

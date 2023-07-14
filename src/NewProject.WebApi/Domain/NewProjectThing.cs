@@ -1,4 +1,4 @@
-﻿namespace NewProject.Domain;
+﻿namespace NewProject.WebApi.Domain;
 
 public class NewProjectThing
 {
