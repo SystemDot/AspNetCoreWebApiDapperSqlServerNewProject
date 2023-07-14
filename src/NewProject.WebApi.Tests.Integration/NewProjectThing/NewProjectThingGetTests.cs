@@ -2,7 +2,8 @@ using System.Net;
 using AutoFixture;
 using FluentAssertions;
 using NewProject.WebApi.Controllers;
-using Newtonsoft.Json;
+using NewProject.WebApi.Tests.Integration.TestSupport;
+using NewProject.WebApi.Tests.Integration.TestSupport.XUnit;
 
 namespace NewProject.WebApi.Tests.Integration.NewProjectThing;
 
@@ -37,13 +38,5 @@ public class NewProjectThingGetTests : TestBase
         TestDbConnectionFactory.DbConnection.DbParameterCollection.DbParameters.Should().ContainSingle(p => p.ParameterName == "Id" && _id.Equals(p.Value));
         HttpResponseMessage.Content.As<NewProjectThingResponseModel>().Id.Should().Be(_id);
         HttpResponseMessage.Content.As<NewProjectThingResponseModel>().TheThing.Should().Be("The Thing");
-    }
-}
-
-public static class HttpContentExtensions
-{
-    public static TModel As<TModel>(this HttpContent httpContent)
-    {
-        return JsonConvert.DeserializeObject<TModel>(httpContent.ReadAsStringAsync().GetAwaiter().GetResult());
     }
 }

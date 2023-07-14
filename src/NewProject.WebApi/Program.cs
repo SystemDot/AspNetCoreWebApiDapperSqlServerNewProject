@@ -28,4 +28,7 @@ app.MapControllers();
 
 app.Run();
 
-public partial class Program { }
+namespace NewProject.WebApi
+{
+    public partial class Program { }
+}

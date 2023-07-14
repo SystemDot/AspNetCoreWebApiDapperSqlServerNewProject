@@ -1,4 +1,4 @@
-namespace NewProject.WebApi.Tests.Integration;
+namespace NewProject.WebApi.Tests.Integration.TestSupport.XUnit;
 
 [CollectionDefinition(nameof(IntegrationTestsCollection))]
 public class IntegrationTestsCollection : ICollectionFixture<IntegrationTestsFixture>

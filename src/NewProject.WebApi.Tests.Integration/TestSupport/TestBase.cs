@@ -1,8 +1,10 @@
 using AutoFixture;
 using Microsoft.Extensions.DependencyInjection;
 using NewProject.Infrastructure.Dapper.SqlServer;
+using NewProject.WebApi.Tests.Integration.TestSupport.AdoNet;
+using NewProject.WebApi.Tests.Integration.TestSupport.XUnit;
 
-namespace NewProject.WebApi.Tests.Integration;
+namespace NewProject.WebApi.Tests.Integration.TestSupport;
 
 [Collection(nameof(IntegrationTestsCollection))]
 public abstract class TestBase : IDisposable
