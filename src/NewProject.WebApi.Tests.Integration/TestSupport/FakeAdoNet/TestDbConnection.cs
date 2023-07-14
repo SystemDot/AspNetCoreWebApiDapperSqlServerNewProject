@@ -1,7 +1,7 @@
 using System.Data;
 using System.Data.Common;
 
-namespace NewProject.WebApi.Tests.Integration.TestSupport.AdoNet;
+namespace NewProject.WebApi.Tests.Integration.TestSupport.FakeAdoNet;
 
 public class TestDbConnection : DbConnection, IDbConnection
 {

@@ -2,7 +2,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
-namespace NewProject.WebApi.Tests.Integration.TestSupport.AdoNet;
+namespace NewProject.WebApi.Tests.Integration.TestSupport.FakeAdoNet;
 
 public class TestDbCommand : DbCommand, IDbCommand
 {

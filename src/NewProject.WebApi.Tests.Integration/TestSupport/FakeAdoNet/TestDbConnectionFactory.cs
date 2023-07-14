@@ -1,7 +1,7 @@
 using System.Data;
 using NewProject.WebApi.Infrastructure.Dapper;
 
-namespace NewProject.WebApi.Tests.Integration.TestSupport.AdoNet;
+namespace NewProject.WebApi.Tests.Integration.TestSupport.FakeAdoNet;
 
 public class TestDbConnectionFactory : IDbConnectionFactory
 {

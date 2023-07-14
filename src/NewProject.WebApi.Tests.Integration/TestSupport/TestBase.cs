@@ -1,7 +1,7 @@
 using AutoFixture;
 using Microsoft.Extensions.DependencyInjection;
 using NewProject.WebApi.Infrastructure.Dapper;
-using NewProject.WebApi.Tests.Integration.TestSupport.AdoNet;
+using NewProject.WebApi.Tests.Integration.TestSupport.FakeAdoNet;
 using NewProject.WebApi.Tests.Integration.TestSupport.XUnit;
 
 namespace NewProject.WebApi.Tests.Integration.TestSupport;
