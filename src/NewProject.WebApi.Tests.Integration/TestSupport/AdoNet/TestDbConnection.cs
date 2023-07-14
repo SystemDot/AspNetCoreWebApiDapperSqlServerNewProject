@@ -5,9 +5,15 @@ namespace NewProject.WebApi.Tests.Integration.TestSupport.AdoNet;
 
 public class TestDbConnection : DbConnection, IDbConnection
 {
-    public TestDbCommand DbCommand;
-    public TestDbParameterCollection DbParameterCollection;
-    public DataTable DataTable = new();
+    private readonly Func<IReadOnlyDictionary<string, DataTable>> _dataTables;
+    private readonly List<TestDbCommand> _dbCommands = new();
+
+    public IEnumerable<TestDbCommand> DbCommands => _dbCommands;
+
+    public TestDbConnection(Func<IReadOnlyDictionary<string, DataTable>> dataTables)
+    {
+        _dataTables = dataTables;
+    }
 
     protected override DbTransaction BeginDbTransaction(IsolationLevel isolationLevel)
     {
@@ -34,8 +40,7 @@ public class TestDbConnection : DbConnection, IDbConnection
 
     protected override DbCommand CreateDbCommand()
     {
-        DbParameterCollection = new TestDbParameterCollection();
-        DbCommand = new(this, DbParameterCollection, DataTable);
-        return DbCommand;
+        _dbCommands.Add(new(this, _dataTables));
+        return DbCommands.Last();
     }
 }

@@ -6,16 +6,15 @@ namespace NewProject.WebApi.Tests.Integration.TestSupport.AdoNet;
 
 public class TestDbCommand : DbCommand, IDbCommand
 {
-    private readonly DataTable _dataTable;
+    private readonly TestDbParameterCollection _testDbParameterCollection = new();
+    private readonly Func<IReadOnlyDictionary<string, DataTable>> _dataTable;
 
     public TestDbCommand(
         DbConnection dbConnection,
-        TestDbParameterCollection dbParameterCollection,
-        DataTable dataTable)
+        Func<IReadOnlyDictionary<string, DataTable>> dataTable)
     {
         _dataTable = dataTable;
         DbConnection = dbConnection;
-        DbParameterCollection = dbParameterCollection;
     }
     public override void Cancel()
     {
@@ -40,9 +39,10 @@ public class TestDbCommand : DbCommand, IDbCommand
     public override CommandType CommandType { get; set; }
     public override UpdateRowSource UpdatedRowSource { get; set; }
     protected override DbConnection? DbConnection { get; set; }
-    protected override DbParameterCollection DbParameterCollection { get; } = new TestDbParameterCollection();
+    protected override DbParameterCollection DbParameterCollection => _testDbParameterCollection;
     protected override DbTransaction? DbTransaction { get; set; }
     public override bool DesignTimeVisible { get; set; }
+    public List<DbParameter> DbParameters => _testDbParameterCollection.DbParameters;
 
     protected override DbParameter CreateDbParameter()
     {
@@ -51,6 +51,9 @@ public class TestDbCommand : DbCommand, IDbCommand
 
     protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
     {
-        return new DataTableReader(_dataTable);
+        if (!_dataTable().TryGetValue(CommandText, out var dataTable))
+            throw new InvalidOperationException($"DataTable not setup for CommandText '{CommandText}'.");
+
+        return new DataTableReader(dataTable);
     }
 }

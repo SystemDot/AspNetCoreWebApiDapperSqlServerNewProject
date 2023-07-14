@@ -23,8 +23,9 @@ public class NewProjectThingPostTests : TestBase
         HttpResponseMessage = await HttpClient.PostAsJsonAsync($"NewProjectThing/{_id}", _model);
 
         HttpResponseMessage.EnsureSuccessStatusCode();
-        TestDbConnectionFactory.DbConnection.DbCommand.CommandText.Should().Be("UpsertNewProjectThing");
-        TestDbConnectionFactory.DbConnection.DbParameterCollection.DbParameters.Should().ContainSingle(p => p.ParameterName == "Id" && _id.Equals(p.Value));
-        TestDbConnectionFactory.DbConnection.DbParameterCollection.DbParameters.Should().ContainSingle(p => p.ParameterName == "TheThing" && _model.TheThing.Equals(p.Value));
+        var dbCommand = TestDbConnectionFactory.DbConnection.DbCommands.Last();
+        dbCommand.CommandText.Should().Be("UpsertNewProjectThing");
+        dbCommand.DbParameters.Should().ContainSingle(p => p.ParameterName == "Id" && _id.Equals(p.Value));
+        dbCommand.DbParameters.Should().ContainSingle(p => p.ParameterName == "TheThing" && _model.TheThing.Equals(p.Value));
     }
 }

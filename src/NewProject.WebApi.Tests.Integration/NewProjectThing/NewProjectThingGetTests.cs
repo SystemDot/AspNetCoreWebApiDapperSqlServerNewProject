@@ -19,6 +19,8 @@ public class NewProjectThingGetTests : TestBase
     [Fact]
     public async Task Given_UnknownId_When_Get_Then_ShouldRespond404()
     {
+        TestDbConnectionFactory.AddOrUpdateDataTable("SelectNewProjectThing", new[] { "Id", "TheThing" });
+
         HttpResponseMessage = await HttpClient.GetAsync($"NewProjectThing/{_id}");
 
         HttpResponseMessage.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -27,15 +29,14 @@ public class NewProjectThingGetTests : TestBase
     [Fact]
     public async Task Given_ValidRequest_When_Get_Then_ShouldExecuteSqlCommand()
     {
-        TestDbConnectionFactory.DbConnection.DataTable.Columns.Add("Id");
-        TestDbConnectionFactory.DbConnection.DataTable.Columns.Add("TheThing");
-        TestDbConnectionFactory.DbConnection.DataTable.Rows.Add(_id, "The Thing");
+        TestDbConnectionFactory.AddOrUpdateDataTable("SelectNewProjectThing", new []{"Id", "TheThing"}, _id, "The Thing");
 
         HttpResponseMessage = await HttpClient.GetAsync($"NewProjectThing/{_id}");
 
         HttpResponseMessage.EnsureSuccessStatusCode();
-        TestDbConnectionFactory.DbConnection.DbCommand.CommandText.Should().Be("SelectNewProjectThing");
-        TestDbConnectionFactory.DbConnection.DbParameterCollection.DbParameters.Should().ContainSingle(p => p.ParameterName == "Id" && _id.Equals(p.Value));
+        var dbCommand = TestDbConnectionFactory.DbConnection.DbCommands.Last();
+        dbCommand.CommandText.Should().Be("SelectNewProjectThing");
+        dbCommand.DbParameters.Should().ContainSingle(p => p.ParameterName == "Id" && _id.Equals(p.Value));
         HttpResponseMessage.Content.As<NewProjectThingResponseModel>().Id.Should().Be(_id);
         HttpResponseMessage.Content.As<NewProjectThingResponseModel>().TheThing.Should().Be("The Thing");
     }
